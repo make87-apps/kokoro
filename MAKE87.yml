@@ -1,0 +1,37 @@
+version: 1
+interfaces:
+  - name: zenoh
+    protocol: zenoh
+    default_port:
+      name: zenoh
+      protocol: TCP
+      target_port: 7447
+    subscribers:
+      - name: incoming_message
+        spec:
+          make87_message: make87_messages.text.PlainText
+        encoding: proto
+        config:
+          type: object
+          properties:
+            handler:
+              type: object
+              properties:
+                handler_type:
+                  type: string
+                  enum: [ FIFO, RING ]
+                  default: RING
+                capacity:
+                  type: integer
+                  minimum: 0
+                  description: "Capacity of the handler. For FIFO, this is the maximum number of messages it can hold. For RING, this is the size of the ring buffer."
+                  default: 10
+container_config:
+  environment:
+    RUST_LOG: info
+build:
+  build_kit:
+    name: rust
+dev_build:
+  build_kit:
+    name: rust

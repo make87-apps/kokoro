@@ -1,0 +1,11 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+make87 = { version = ">=0.1.0", features = ["zenoh", "protobuf"] }
+make87_messages = ">=0.2.8"
+tokio = "1.44.1"
+log = "0.4.27"
+env_logger = "0.11.8"
