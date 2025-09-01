@@ -6,11 +6,41 @@ interfaces:
       name: zenoh
       protocol: TCP
       target_port: 7447
-    subscribers:
-      - name: incoming_message
+    publishers:
+      - name: tts_audio
         spec:
-          make87_message: make87_messages.text.PlainText
+          make87_message: make87_messages.audio.frame_pcm_s16le.FramePcmS16le:3dq2tw
         encoding: proto
+        config:
+          type: object
+          properties:
+            congestion_control:
+              type: string
+              enum: [ DROP, BLOCK ]
+              default: DROP
+            priority:
+              type: string
+              enum:
+                - REAL_TIME
+                - INTERACTIVE_HIGH
+                - INTERACTIVE_LOW
+                - DATA_HIGH
+                - DATA
+                - DATA_LOW
+                - BACKGROUND
+              default: DATA
+            express:
+              type: boolean
+              default: true
+            reliability:
+              type: string
+              enum: [ BEST_EFFORT, RELIABLE ]
+              default: RELIABLE
+    subscribers:
+      - name: tts_text
+        spec:
+          string: string
+        encoding: utf-8
         config:
           type: object
           properties:
@@ -30,8 +60,10 @@ container_config:
   environment:
     RUST_LOG: info
 build:
-  build_kit:
-    name: rust
+  custom:
+    dockerfile: ./build_kit/Dockerfile
 dev_build:
   build_kit:
     name: rust
+    build_additions:
+      ide: vscode_server_rust

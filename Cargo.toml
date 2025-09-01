@@ -6,6 +6,14 @@ edition = "2021"
 [dependencies]
 make87 = { version = ">=0.1.0", features = ["zenoh", "protobuf"] }
 make87_messages = ">=0.2.8"
-tokio = "1.44.1"
-log = "0.4.27"
-env_logger = "0.11.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+log = "0.4"
+env_logger = "0.11"
+anyhow = "1"
+
+# ONNX Runtime – load the shared library at runtime
+ort = { version = "2.0.0-rc.10", features = ["ndarray"]  }
+ndarray = "0.15"
+tokenizers = { version = "0.19", default-features = false, features = ["onig"] }
+bytemuck = "1.16"
+futures = "0.3.31"
