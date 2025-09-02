@@ -14,6 +14,10 @@ anyhow = "1"
 # ONNX Runtime – load the shared library at runtime
 ort = { version = "2.0.0-rc.10", features = ["ndarray"]  }
 ndarray = "0.15"
-tokenizers = { version = "0.19", default-features = false, features = ["onig"] }
 bytemuck = "1.16"
 futures = "0.3.31"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+kokoro-tts = { version = "0.2", default-features = false, features = ["use-cmudict"] }
+num_cpus = "1.17.0"
+lru = "0.12"
