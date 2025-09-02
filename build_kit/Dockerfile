@@ -36,7 +36,7 @@ RUN curl -L "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/
     curl -L "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/tokenizer.json?download=true" \
       -o /models/tokenizer.json && \
     curl -L "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/voices/af_bella.bin?download=true" \
-      -o /models/voices/bm_lewis.bin
+      -o /models/voices/af_bella.bin
 
 ENV KOKORO_MODEL=/models/onnx/model_quantized.onnx
 ENV KOKORO_TOKENIZER=/models/tokenizer.json
